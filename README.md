@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Employee Training System:
 
-Things you may want to cover:
+Three authority levels: admin, manager, employee.
 
-* Ruby version
+Manager can add, modify employees, see the results of quizzes employees did
 
-* System dependencies
+Employees can login to do courses and write quizzes.
 
-* Configuration
+Use local computer as host. Then in browser, type in localhost:3000/
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Git clone the url
+rails s, install needed bundles
+should configure the mysql databases first.
+rails db:reset to reset the local computer’s mysql databases
+rails db:migrate
+rails db:seed to save the pre-saved files in mysql
+manager account: daniel@gmail.com password:123456
+admin: admin@gmail.com password: foobar
+employees: peter/haoyu/hanxi/changyu/jiahe @gmail.com password:123456
