@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= User.find(@score.user_id).name %>
+</p>
+
+<p>
+  <strong>Quiz:</strong>
+  <%= Article.find(@score.article_id).title%>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @score.score %>%
+</p>

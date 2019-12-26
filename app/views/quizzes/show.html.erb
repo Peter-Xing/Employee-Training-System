@@ -1,0 +1,59 @@
+<head> 
+<style> 
+
+</style> 
+</head> 
+<body> 
+<p id="demo"></p> 
+<script> 
+var deadline = new Date("<%= @score.created_at + (30) %>").getTime(); 
+var x = setInterval(function() { 
+var now = new Date().getTime(); 
+var t = deadline - now; 
+var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
+var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
+var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
+var seconds = Math.floor((t % (1000 * 60)) / 1000); 
+document.getElementById("demo").innerHTML = days + "d "  
++ hours + "h " + minutes + "m " + seconds + "s "; 
+    if (t < 0) { 
+        clearInterval(x);
+         $("#quiz-form").trigger('submit.rails');
+        window.location = "<%= score_path @score %>";
+    } 
+}, 1000); 
+</script> 
+
+<p id="notice"><%= notice %></p>
+
+
+<!--Call new score and if no other score is done -->
+<p>
+  <strong>Title:</strong>
+  <%= @quiz.title %>
+</p>
+<%= form_tag({:action => "grading"}, :id => 'quiz-form',:remote => true) do %>
+<ol>
+	<% for question in @quiz.questions %>
+		<li>
+			<%=h question.content %>
+			<ul>
+				<% for answer in question.answers %>
+					<li>
+						<%= radio_button_tag("answer[#{question.id}]", answer.id) %>
+						<%=h answer.content %>
+					</li>
+				<% end %>
+			</ul>
+		</li>
+	<% end %>
+</ol>
+
+<%= hidden_field_tag :quiz_id, @quiz.id %>
+
+<div><%= submit_tag("Submit", :class => "submit") %></div>
+<% end %>
+<p>
+	<%= link_to 'Back', quizzes_path %>
+	<%= link_to 'Edit', edit_quiz_path(@quiz) %>
+</p>
